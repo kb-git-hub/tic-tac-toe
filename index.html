@@ -14,10 +14,7 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
 
-    <script
-    src="https://kit.fontawesome.com/4c536a6bd5.js"
-    crossorigin="anonymous"
-  ></script>
+    <script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>
 
 
 </head>
@@ -28,9 +25,32 @@
     </div>
 
     <div class="main">
-        <div class="gameControls"></div>
+        <div class="gameControls">
+
+            <div class="newGame gameSections">
+                <div>new game</div>
+                <button class="btn" id="btn-new-game">start</button>
+            </div>
+            <div class="gameType gameSections">
+                <div>game type</div>
+                <button class="btn" id="btn-pvp">PvP</button>
+                <button class="btn" id="btn-pvc">PvC</button>
+            </div>
+
+            <div class="gameSections">
+                <div>score</div>
+                <div class="scoreCard">
+                <div>p1</div>
+                <div>p2</div>
+                <div class="p1Score" id="p1Score">1</div>
+                <div class="p2Score" id="p2Score">2</div>
+            </div>
+            </div>
+        </div>
         <div class="gameBoard"></div>
     </div>
+
+
 
     <div class="footer">
         <p>copyright ©
