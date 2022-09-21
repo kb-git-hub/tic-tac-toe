@@ -5,15 +5,17 @@
     --grey: #A8A29E;
     --black: #1C1917;
     --Orange: #EA580C;
-    --lime-green: #84CC16;
+    --green-300: #BEF264;
+    --green-500: #84CC16;
+    --green-600: #65A30D;
     --border-radius: 8px;
-    --spacing-xs: 5px;
     --spacing-sm: 10px;
-    --spacing-md: 15px;
-    --spacing-lg: 20px;
-    --spacing-xl: 40px;
-    --container-width: 1200px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --container-width: 1000px;
     --shadow: rgba(0, 0, 0, 0.16) 0px 6px 8px;
+    --outline: 2px solid red;
+    --board-Dimensions: 400px;
 }
 
 /* CSS Reset */
@@ -25,14 +27,28 @@
     margin: 0;
 }
 
-html {
-    position: relative;
+html, body {
     min-height: 100%;
+    height: 100%;
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: var(--grey);
+    font-family: 'Press Start 2P', cursive;
+    min-width: 640px;
+    min-height: 610px;
 }
+
+.header.footer {
+    flex: none;
+}
+
+.main {
+    flex: auto;
+    min-height: 460px;
+  }
 
 input[type='text'],
 input[type='number'] {
@@ -48,4 +64,66 @@ input {
     font-weight: inherit;
     cursor: pointer;
     outline: none;
+}
+
+/* utils  */
+
+
+/* Header  */
+.header{
+    background-color: var(--green-500);
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg)
+}
+
+/* main */
+.main {
+    display: grid;
+    grid-template-columns: max-content auto 200px;
+
+}
+
+.gameControls{
+    width: 200px;
+    background-color: var(--green-500);
+    justify-self: stretch;
+}
+
+
+.gameBoard{
+    width: var(--board-Dimensions) ;
+    height: var(--board-Dimensions) ;
+    outline: var(--outline);
+    justify-self: center;
+    margin: var(--spacing-lg);
+}
+
+
+/* footer */
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--green-500);
+}
+
+.fa-github {
+    font-size: 24px;
+    color: var(--black);
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+    transform: rotate(360deg) scale(1.2);
 }
