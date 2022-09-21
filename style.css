@@ -1,0 +1,51 @@
+/* CSS variables */
+
+:root {
+    --white: #F5F5F4;
+    --grey: #A8A29E;
+    --black: #1C1917;
+    --Orange: #EA580C;
+    --lime-green: #84CC16;
+    --border-radius: 8px;
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 40px;
+    --container-width: 1200px;
+    --shadow: rgba(0, 0, 0, 0.16) 0px 6px 8px;
+}
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: var(--grey);
+}
+
+input[type='text'],
+input[type='number'] {
+    cursor: text;
+}
+
+button,
+input {
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    outline: none;
+}
