@@ -43,23 +43,20 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    /* background-color: var(--grey); */
     background: linear-gradient(-45deg, var(--primary-blue), var(--primary-green), var(--primary-yellow), var(--secondary-orange));
     background-size: 200% 200%;
     animation: gradient 5s ease infinite;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Bungee', cursive;
     color: var(--white);
 
 }
 
-.header.footer {
+.header,.footer {
     flex: none;
 }
 
 .main {
     flex: auto;
-
-
   }
 
 input[type='text'],
@@ -70,7 +67,8 @@ input[type='number'] {
 button,
 input {
     border: none;
-    color: var(--green-500);
+    background-color: var(--primary-blue);
+    color: var(--white);
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -82,10 +80,9 @@ input {
 /* utils  */
 
 .btn{
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 0px var(--spacing-md);
     border-radius: var(--border-radius);
     letter-spacing: 2px;
-    border: 2px solid var(--Orange);
     transition: 0.25s ease-in-out;
 }
 
@@ -108,50 +105,56 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--spacing-lg)
+    padding: var(--spacing-sm)
 }
 
 /* main */
 .main {
     display: grid;
-    grid-template-columns: max-content auto 200px;
+    grid-template-columns: 200px auto 200px;
 }
 
 .gameControls{
     width: 200px;
     background-color: var(--green-500);
     display: grid;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(3, minmax(min-content, max-content));
 }
 
 .gameSections{
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     justify-content: center;
-    padding: var(--spacing-sm);
     align-items: center;
+    margin-top: var(--spacing-lg);
 }
 
-.gameSections{
-    display: flex;
-    align-items: center;
-}
+
 
 .scoreCard{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: var(--spacing-sm);
+    /* justify-content: flex-start; */
+    /* grid-template-columns: repeat(2, min-content); */
+    /* justify-items: center;
+    align-self: center; */
 }
 
 .scoreCard > div{
-    padding: var(--spacing-sm);
+    width: 80px;
 }
 
 .p1Score,.p2Score{
     background-color: var(--white);
     color: var(--green-500);
     border-radius: var(--border-radius);
+    
+   
+    
 }
 
 .gameBoard{
