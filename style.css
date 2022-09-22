@@ -103,6 +103,22 @@ body>div {
     cursor: default;
 }
 
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
 
 /* Header  */
 .header {
@@ -198,26 +214,12 @@ h1 {
     background-color: var(--green-500);
 }
 
-.fa-github {
+.fa-github-alt {
     font-size: 24px;
     color: var(--white);
     transition: transform 0.3s ease-in-out;
 }
 
-.fa-github:hover {
+.fa-github-alt:hover {
     transform: rotate(360deg) scale(1.2);
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
 }
