@@ -119,7 +119,6 @@ body>div {
 
 
 
-
 /* Header  */
 .header {
     background-color: var(--green-500);
@@ -199,6 +198,7 @@ h1 {
     box-shadow: var(--shadow);
     transition: 0.15s ease-in-out;
 }
+
 
 .boardSquare:hover {
     scale: 105%;
