@@ -164,6 +164,24 @@ h1 {
     width: 80px;
 }
 
+
+/* gametype selection  */
+#btn-pvp, #btn-pvc{
+    background-color: var(--green-300);
+    box-shadow: none;
+}
+
+#btn-pvp:hover, #btn-pvc:hover{
+    background-color: var(--green-300);
+    background-color: var(--primary-orange);
+    box-shadow: var(--shadow);
+}
+
+#btn-pvp:active, #btn-pvc:active{
+    background-color: var(--primary-orange);
+    box-shadow: var(--shadow);
+}
+
 .p1Score,
 .p2Score {
     background-color: var(--green-600);
