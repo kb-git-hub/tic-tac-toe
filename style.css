@@ -1,5 +1,4 @@
 /* CSS variables */
-
 :root {
     --white: #F5F5F4;
     --grey: #A8A29E;
@@ -22,9 +21,10 @@
     --secondary-blue: #1aa3ff;
     --primary-green: #6eeb83;
     --primary-yellow: #e4ff1a;
-    --primary-orange: #ffb800;
+    --primary-orange: #ffae00;
 
 }
+
 
 /* CSS Reset */
 *,
@@ -46,8 +46,8 @@ body {
     display: flex;
     flex-direction: column;
     background: linear-gradient(-45deg, var(--primary-blue), var(--primary-green), var(--secondary-blue));
-    background-size: 150% 150%;
-    animation: gradient 5s ease infinite;
+    background-size: 300% 300%;
+    animation: gradient 8s ease infinite;
     font-family: 'Bungee', cursive;
     color: var(--white);
 
@@ -81,7 +81,6 @@ input {
 
 
 /* utils  */
-
 .btn {
     padding: 0px var(--spacing-md);
     border-radius: var(--border-radius);
@@ -118,7 +117,6 @@ body>div {
 }
 
 
-
 /* Header  */
 .header {
     background-color: var(--green-500);
@@ -130,6 +128,7 @@ h1 {
     align-items: center;
     padding: var(--spacing-sm)
 }
+
 
 /* main */
 .main {
@@ -174,7 +173,6 @@ h1 {
 
 
 /* gameboard */
-
 .gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -189,7 +187,7 @@ h1 {
 }
 
 .boardSquare {
-    background-color: var(--Orange);
+    background-color: var(--primary-orange);
     border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
@@ -199,10 +197,10 @@ h1 {
     transition: 0.15s ease-in-out;
 }
 
-
 .boardSquare:hover {
     scale: 105%;
 }
+
 
 /* footer */
 .footer {
