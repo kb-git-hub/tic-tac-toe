@@ -193,14 +193,13 @@ h1 {
 /* gameboard */
 .gameBoard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3,minmax(33%, 1fr));
+    grid-template-rows: repeat(3,minmax(33%, 1fr));
     gap: var(--spacing-sm);
     width: var(--board-Dimensions);
     height: var(--board-Dimensions);
     justify-self: center;
     margin: var(--spacing-lg);
-
     border-radius: var(--border-radius);
 }
 
@@ -210,7 +209,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 32px;
+    font-size: 84px;
     box-shadow: var(--shadow);
     transition: 0.15s ease-in-out;
 }

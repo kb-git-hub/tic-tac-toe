@@ -53,6 +53,7 @@ class GameLogic {
     constructor(p1 = 'player', p2 = 'player') {
         this.p1 = p1
         this.p2 = p2
+        this.gamePlay = false
     }
     verifyGameType() { }
     createPlayers() { }
@@ -79,20 +80,23 @@ const
     startButton = document.querySelector('#bn-new-game'),
     resetButton = document.querySelector('#bn-reset-game'),
 
-    gameTypeSelectorPvP = document.querySelector('#btn-pvp'), 
+    gameTypeSelectorPvP = document.querySelector('#btn-pvp'),
     gameTypeSelectorPvAI = document.querySelector('#btn-pvc'),
 
     p1Score = document.querySelector('#p1Score'),
     p2Score = document.querySelector('#p2Score')
 
-    
+
 /*
 Event Listeners
 */
 
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
-    const clickedSquare = e.target.getAttribute('id')
-    if (clickedSquare !== 'gameBoard'){console.log(clickedSquare)}
+    const clickedSquare = e.target
+    if (game.gamePlay) {
+        e.target.textContent = 'X'
+    }
+    if (clickedSquare !== 'gameBoard') { console.log(clickedSquare.getAttribute('id'), e.target.textContent) }
 }
 gameBoard.addEventListener('click', handleBoardClick)
