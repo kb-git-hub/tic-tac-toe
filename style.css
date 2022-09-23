@@ -170,7 +170,18 @@ h1 {
 #btn-start-game.active{
     scale: 105%;
     background-color: var(--primary-orange);
+}
 
+#btn-reset-game:hover{
+    background-color: var(--Orange);
+   
+    
+}
+#btn-reset-game:active{
+    background-color: var(--Orange);
+    transition: .05s ease-in-out;
+    scale: 90%;
+    
 }
 
 #btn-pvp, #btn-pvc{
@@ -188,6 +199,7 @@ h1 {
     background-color: var(--primary-orange);
     box-shadow: var(--shadow);
     scale: 105%;
+    padding: 0px var(--spacing-lg);
 }
 
 .p1Score,

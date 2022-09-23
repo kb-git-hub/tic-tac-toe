@@ -85,8 +85,6 @@ const resetGame = () => {
     setTimeout(()=>{
         startButton.textContent = 'start'
     },100)
-    
-    
 }
 
 const selectGameType = e =>{
@@ -111,8 +109,8 @@ const startGame = () =>{
     setTimeout(()=>{
         startButton.textContent = 'playing'
     },100)
-    
 
+    game.activateGame = true
 }
 
 
@@ -137,13 +135,12 @@ Game Init
 const game = new GameLogic()
 const board = new Gameboard(gameBoard)
 board.buildBoard()
+gameTypeSelectorPvP.classList.add('active')
 
 
 /*
 Event Listeners
 */
-
-
 
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
