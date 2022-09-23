@@ -1,7 +1,12 @@
+/*
+Classes
+*/
+
 class Gameboard {
-    constructor() {
+    constructor(gameBoard) {
         this.board = []
         this.drawspeed = 65
+        this.gameBoard = gameBoard
     }
 
     // build 9 board squares, apply IDs, push to this.board
@@ -16,23 +21,30 @@ class Gameboard {
                 this.board.push(boardSquare)
             }
         }
+        this.displayBoard()
     }
 
     // append this.board elements to GameBoard at interval
     displayBoard() {
         let intervalID
         let divID = 0
-        const gameBoard = document.querySelector('#gameBoard')
         intervalID = setInterval(() => {
-            gameBoard.appendChild(this.board[divID])
+            this.gameBoard.appendChild(this.board[divID])
             divID++
             if (divID > 8) clearInterval(intervalID)
         }, this.drawspeed)
     }
-    // Place Piece
-    placePiece() { }
+
     //Reset Board
-    resetBoard() { }
+    resetBoard() {
+        this.board = []
+        this.gameBoard.innerHTML = ''
+        this.buildBoard()
+
+    }
+
+   
+
 }
 
 
@@ -50,12 +62,13 @@ class Player {
 
 
 class GameLogic {
-    constructor(p1 = 'player', p2 = 'player') {
+    constructor(p1 = 'player', p2 = 'player', gameType = 'PvP') {
         this.p1 = p1
         this.p2 = p2
-        this.gamePlay = false
+        this.gameType = gameType
+        this.activateGame = true
     }
-    verifyGameType() { }
+
     createPlayers() { }
     startGame() { }
     resetGame() { }
@@ -65,20 +78,23 @@ class GameLogic {
 }
 
 
-// game init
-const player1 = new Player()
-const board = new Gameboard()
-const game = new GameLogic()
-board.buildBoard()
-board.displayBoard()
 
 
+/*
+Functions
+*/
+const resetGame = () => {
+    board.resetBoard()
+}
 
-// User interface
+
+/* 
+User interface Variables
+*/
 const
     gameBoard = document.querySelector('#gameBoard'),
-    startButton = document.querySelector('#bn-new-game'),
-    resetButton = document.querySelector('#bn-reset-game'),
+    startButton = document.querySelector('#btn-new-game'),
+    resetButton = document.querySelector('#btn-reset-game'),
 
     gameTypeSelectorPvP = document.querySelector('#btn-pvp'),
     gameTypeSelectorPvAI = document.querySelector('#btn-pvc'),
@@ -88,15 +104,26 @@ const
 
 
 /*
+Game Init
+*/
+const game = new GameLogic()
+const board = new Gameboard(gameBoard)
+board.buildBoard()
+
+
+/*
 Event Listeners
 */
 
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
     const clickedSquare = e.target
-    if (game.gamePlay) {
+    if (game.activateGame) {
         e.target.textContent = 'X'
     }
     if (clickedSquare !== 'gameBoard') { console.log(clickedSquare.getAttribute('id'), e.target.textContent) }
 }
 gameBoard.addEventListener('click', handleBoardClick)
+
+// Reset Game
+resetButton.onclick = resetGame

@@ -126,7 +126,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--spacing-sm)
+    padding: var(--spacing-sm);
 }
 
 
@@ -227,6 +227,8 @@ h1 {
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
     background-color: var(--green-500);
+    color: var(--green-600);
+
 }
 
 .fa-github-alt {
