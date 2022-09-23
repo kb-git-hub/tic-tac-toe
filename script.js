@@ -60,6 +60,7 @@ class GameLogic {
         this.gameType = gameType
         this.activateGame = false
         this.turn = null
+        this.piecesArray = []
     }
 
     startGame() {
@@ -73,9 +74,22 @@ class GameLogic {
     }
 
 
-    checkEmptySquare() { }
+    checkEmptySquare() { 
+    }
+
+
     checkforWin() { }
     updateWinner() { }
+
+    buildPiecesArray(gameBoard){
+        for (const board of gameBoard) {
+            let item = {
+                square: board.getAttribute('id'),
+                piece: board.textContent
+            }
+            this.piecesArray.push(item)
+        }
+    }
 }
 
 
@@ -131,6 +145,9 @@ const handleBoardClick = e => {
             if (game.turn === game.p1) game.turn = game.p2
             else if (game.turn === game.p2) game.turn = game.p1
 
+            //check empty square if ids match, then check if empty. if true, place.
+            game.piecesArray.forEach(element=>console.log(element))
+
         }
     }
 }
@@ -164,6 +181,7 @@ gameTypeSelectorPvP.classList.add('active')
 const player1 = new Player('><')
 const player2 = new Player('()')
 const game = new GameLogic(player1, player2)
+game.buildPiecesArray(board.board)
 
 
 /*
