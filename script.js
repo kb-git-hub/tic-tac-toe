@@ -43,11 +43,10 @@ class Gameboard {
 }
 
 
-
 class Player {
-    constructor(type = 'human') {
+    constructor(piece) {
+        this.type = 'player'
         this.piece = piece
-        this.type = type
         this.wins = 0
     }
     displayWins() { }
@@ -55,18 +54,28 @@ class Player {
 
 
 
-
 class GameLogic {
-    constructor( p2 = 'player', gameType = 'pvp') {
+    constructor(p2 = 'player', gameType = 'pvp') {
         this.p1 = 'player'
         this.p2 = p2
         this.gameType = gameType
         this.activateGame = false
     }
 
-    createPlayers() { }
-    startGame() { }
-    resetGame() { }
+    startGame() {
+        this.activateGame = true
+        this.createPlayers()
+    }
+
+    resetGame() {
+        this.activateGame = false
+    }
+
+    createPlayers() {
+   
+     }
+
+
     checkEmptySquare() { }
     checkforWin() { }
     updateWinner() { }
@@ -78,40 +87,47 @@ class GameLogic {
 /*
 Functions
 */
+const startGame = () => {
+    startButton.classList.add('active')
+    setTimeout(() => {
+        startButton.textContent = 'playing'
+    }, 100)
+
+    const player1 = new Player(this.p1, 'X')
+    const player2 = new Player(this.p2, 'O')
+    game.startGame()
+}
+
+
+
 const resetGame = () => {
     board.resetBoard()
     game.resetGame()
     startButton.classList.remove('active')
-    setTimeout(()=>{
+    setTimeout(() => {
         startButton.textContent = 'start'
-    },100)
+    }, 100)
 }
 
-const selectGameType = e =>{
+
+
+const selectGameType = e => {
     const gameTypeSelector = e.currentTarget
-    if (gameTypeSelector.id === 'btn-pvp'){
-        game.p2 = 'player'
+    if (gameTypeSelector.id === 'btn-pvp') {
         gameTypeSelectorPvP.classList.add('active')
         gameTypeSelectorPvC.classList.remove('active')
+        player2.type = 'player'
         game.gameType = 'pvp'
-        
-    } else if (gameTypeSelector.id === 'btn-pvc'){
-        game.p2 = 'computer'
+
+    } else if (gameTypeSelector.id === 'btn-pvc') {
         gameTypeSelectorPvC.classList.add('active')
         gameTypeSelectorPvP.classList.remove('active')
+        player2.type = 'computer'
         game.gameType = 'pvc'
     }
-
 }
 
-const startGame = () =>{
-    startButton.classList.add('active')
-    setTimeout(()=>{
-        startButton.textContent = 'playing'
-    },100)
 
-    game.activateGame = true
-}
 
 
 /* 
@@ -136,6 +152,8 @@ const game = new GameLogic()
 const board = new Gameboard(gameBoard)
 board.buildBoard()
 gameTypeSelectorPvP.classList.add('active')
+const player1 = new Player('X')
+const player2 = new Player('O')
 
 
 /*
