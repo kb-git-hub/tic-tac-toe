@@ -105,18 +105,20 @@ const resetGame = () => {
 
 
 const selectGameType = e => {
-    const gameTypeSelector = e.currentTarget
-    if (gameTypeSelector.id === 'btn-pvp') {
-        gameTypeSelectorPvP.classList.add('active')
-        gameTypeSelectorPvC.classList.remove('active')
-        player2.type = 'player'
-        game.gameType = 'pvp'
+    if (game.activateGame === false) {
+        const gameTypeSelector = e.currentTarget
+        if (gameTypeSelector.id === 'btn-pvp') {
+            gameTypeSelectorPvP.classList.add('active')
+            gameTypeSelectorPvC.classList.remove('active')
+            player2.type = 'player'
+            game.gameType = 'pvp'
 
-    } else if (gameTypeSelector.id === 'btn-pvc') {
-        gameTypeSelectorPvC.classList.add('active')
-        gameTypeSelectorPvP.classList.remove('active')
-        player2.type = 'computer'
-        game.gameType = 'pvc'
+        } else if (gameTypeSelector.id === 'btn-pvc') {
+            gameTypeSelectorPvC.classList.add('active')
+            gameTypeSelectorPvP.classList.remove('active')
+            player2.type = 'computer'
+            game.gameType = 'pvc'
+        }
     }
 }
 
@@ -159,8 +161,8 @@ Game Init
 const board = new Gameboard(gameBoard)
 board.buildBoard()
 gameTypeSelectorPvP.classList.add('active')
-const player1 = new Player('X')
-const player2 = new Player('O')
+const player1 = new Player('><')
+const player2 = new Player('()')
 const game = new GameLogic(player1, player2)
 
 
