@@ -1,7 +1,6 @@
 /*
 Classes
 */
-
 class Gameboard {
     constructor(gameBoard) {
         this.board = []
@@ -40,17 +39,13 @@ class Gameboard {
         this.board = []
         this.gameBoard.innerHTML = ''
         this.buildBoard()
-
     }
-
-   
-
 }
 
 
 
 class Player {
-    constructor(piece = 'X', type = 'human') {
+    constructor(type = 'human') {
         this.piece = piece
         this.type = type
         this.wins = 0
@@ -66,7 +61,7 @@ class GameLogic {
         this.p1 = p1
         this.p2 = p2
         this.gameType = gameType
-        this.activateGame = true
+        this.activateGame = false
     }
 
     createPlayers() { }
@@ -85,6 +80,15 @@ Functions
 */
 const resetGame = () => {
     board.resetBoard()
+    game.resetGame()
+    
+}
+
+const selectGameType = e =>{
+    const gameType = e.currentTarget //currentTarget avoids span complications
+    console.log(gameType)
+    //will return the something that dicatates gametype.
+
 }
 
 
@@ -127,3 +131,5 @@ gameBoard.addEventListener('click', handleBoardClick)
 
 // Reset Game
 resetButton.onclick = resetGame
+gameTypeSelectorPvP.onclick = selectGameType
+gameTypeSelectorPvAI.onclick = selectGameType
