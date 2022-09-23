@@ -165,7 +165,14 @@ h1 {
 }
 
 
-/* gametype selection  */
+/* game start and gametype selection  */
+
+#btn-start-game.active{
+    scale: 105%;
+    background-color: var(--primary-orange);
+
+}
+
 #btn-pvp, #btn-pvc{
     background-color: var(--green-300);
     box-shadow: none;

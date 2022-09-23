@@ -81,6 +81,11 @@ Functions
 const resetGame = () => {
     board.resetBoard()
     game.resetGame()
+    startButton.classList.remove('active')
+    setTimeout(()=>{
+        startButton.textContent = 'start'
+    },100)
+    
     
 }
 
@@ -101,13 +106,22 @@ const selectGameType = e =>{
 
 }
 
+const startGame = () =>{
+    startButton.classList.add('active')
+    setTimeout(()=>{
+        startButton.textContent = 'playing'
+    },100)
+    
+
+}
+
 
 /* 
 User interface Variables
 */
 const
     gameBoard = document.querySelector('#gameBoard'),
-    startButton = document.querySelector('#btn-new-game'),
+    startButton = document.querySelector('#btn-start-game'),
     resetButton = document.querySelector('#btn-reset-game'),
 
     gameTypeSelectorPvP = document.querySelector('#btn-pvp'),
@@ -141,7 +155,8 @@ const handleBoardClick = e => {
 }
 gameBoard.addEventListener('click', handleBoardClick)
 
-// Reset Game
+
 resetButton.onclick = resetGame
 gameTypeSelectorPvP.onclick = selectGameType
 gameTypeSelectorPvC.onclick = selectGameType
+startButton.onclick = startGame
