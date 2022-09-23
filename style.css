@@ -177,9 +177,10 @@ h1 {
     box-shadow: var(--shadow);
 }
 
-#btn-pvp:active, #btn-pvc:active{
+#btn-pvp.active, #btn-pvc.active{
     background-color: var(--primary-orange);
     box-shadow: var(--shadow);
+    scale: 105%;
 }
 
 .p1Score,

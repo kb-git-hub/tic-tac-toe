@@ -57,8 +57,8 @@ class Player {
 
 
 class GameLogic {
-    constructor(p1 = 'player', p2 = 'player', gameType = 'PvP') {
-        this.p1 = p1
+    constructor( p2 = 'player', gameType = 'pvp') {
+        this.p1 = 'player'
         this.p2 = p2
         this.gameType = gameType
         this.activateGame = false
@@ -85,9 +85,19 @@ const resetGame = () => {
 }
 
 const selectGameType = e =>{
-    const gameType = e.currentTarget //currentTarget avoids span complications
-    console.log(gameType)
-    //will return the something that dicatates gametype.
+    const gameTypeSelector = e.currentTarget
+    if (gameTypeSelector.id === 'btn-pvp'){
+        game.p2 = 'player'
+        gameTypeSelectorPvP.classList.add('active')
+        gameTypeSelectorPvC.classList.remove('active')
+        game.gameType = 'pvp'
+        
+    } else if (gameTypeSelector.id === 'btn-pvc'){
+        game.p2 = 'computer'
+        gameTypeSelectorPvC.classList.add('active')
+        gameTypeSelectorPvP.classList.remove('active')
+        game.gameType = 'pvc'
+    }
 
 }
 
@@ -101,7 +111,7 @@ const
     resetButton = document.querySelector('#btn-reset-game'),
 
     gameTypeSelectorPvP = document.querySelector('#btn-pvp'),
-    gameTypeSelectorPvAI = document.querySelector('#btn-pvc'),
+    gameTypeSelectorPvC = document.querySelector('#btn-pvc'),
 
     p1Score = document.querySelector('#p1Score'),
     p2Score = document.querySelector('#p2Score')
@@ -119,6 +129,8 @@ board.buildBoard()
 Event Listeners
 */
 
+
+
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
     const clickedSquare = e.target
@@ -132,4 +144,4 @@ gameBoard.addEventListener('click', handleBoardClick)
 // Reset Game
 resetButton.onclick = resetGame
 gameTypeSelectorPvP.onclick = selectGameType
-gameTypeSelectorPvAI.onclick = selectGameType
+gameTypeSelectorPvC.onclick = selectGameType
