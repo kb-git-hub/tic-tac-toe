@@ -81,7 +81,8 @@ class GameLogic {
     checkforWin() { }
     updateWinner() { }
 
-    buildPiecesArray(gameBoard){
+    updatePiecesArray(gameBoard){
+        this.piecesArray = []
         for (const board of gameBoard) {
             let item = {
                 square: board.getAttribute('id'),
@@ -111,6 +112,7 @@ const startGame = () => {
 const resetGame = () => {
     board.resetBoard()
     game.resetGame()
+    game.updatePiecesArray(board.board)
     startButton.classList.remove('active')
     setTimeout(() => {
         startButton.textContent = 'start'
@@ -145,8 +147,8 @@ const handleBoardClick = e => {
             if (game.turn === game.p1) game.turn = game.p2
             else if (game.turn === game.p2) game.turn = game.p1
 
-            //check empty square if ids match, then check if empty. if true, place.
-            game.piecesArray.forEach(element=>console.log(element))
+            //check empty square if ids match, then check if empty. if true, pal
+            game.updatePiecesArray(board.board)
 
         }
     }
@@ -181,7 +183,7 @@ gameTypeSelectorPvP.classList.add('active')
 const player1 = new Player('><')
 const player2 = new Player('()')
 const game = new GameLogic(player1, player2)
-game.buildPiecesArray(board.board)
+game.updatePiecesArray(board.board)
 
 
 /*
