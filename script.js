@@ -73,15 +73,18 @@ class GameLogic {
         this.activateGame = false
     }
 
-
-    checkEmptySquare() { 
+    checkSquareOccupied(square) {
+        for (const arrayItem of this.piecesArray) {
+            if (arrayItem.square === square) {
+                return (arrayItem.piece ? true : false)
+            }
+        }
     }
-
 
     checkforWin() { }
     updateWinner() { }
 
-    updatePiecesArray(gameBoard){
+    updatePiecesArray(gameBoard) {
         this.piecesArray = []
         for (const board of gameBoard) {
             let item = {
@@ -141,13 +144,16 @@ const selectGameType = e => {
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
     const clickedSquare = e.target
+    const clickedSquareID = clickedSquare.getAttribute('id')
     if (game.activateGame) {
-        if (clickedSquare.getAttribute('id') !== 'gameBoard') {
-            clickedSquare.textContent = game.turn.piece
-            if (game.turn === game.p1) game.turn = game.p2
-            else if (game.turn === game.p2) game.turn = game.p1
+        if (clickedSquareID !== 'gameBoard') {
+            if (!game.checkSquareOccupied(clickedSquareID)) {
+                clickedSquare.textContent = game.turn.piece
+                if (game.turn === game.p1) game.turn = game.p2
+                else if (game.turn === game.p2) game.turn = game.p1
+            }
 
-            //check empty square if ids match, then check if empty. if true, pal
+
             game.updatePiecesArray(board.board)
 
         }
