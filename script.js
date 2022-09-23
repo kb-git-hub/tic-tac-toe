@@ -42,7 +42,6 @@ class Gameboard {
     }
 }
 
-
 class Player {
     constructor(piece) {
         this.type = 'player'
@@ -52,28 +51,26 @@ class Player {
     displayWins() { }
 }
 
-
+////////////////////////////////////
 
 class GameLogic {
-    constructor(p2 = 'player', gameType = 'pvp') {
-        this.p1 = 'player'
+    constructor(p1, p2, gameType = 'pvp') {
+        this.p1 = p1
         this.p2 = p2
         this.gameType = gameType
         this.activateGame = false
+        this.turn = null
     }
 
     startGame() {
         this.activateGame = true
-        this.createPlayers()
+        this.turn = this.p1
+
     }
 
     resetGame() {
         this.activateGame = false
     }
-
-    createPlayers() {
-   
-     }
 
 
     checkEmptySquare() { }
@@ -93,11 +90,8 @@ const startGame = () => {
         startButton.textContent = 'playing'
     }, 100)
 
-    const player1 = new Player(this.p1, 'X')
-    const player2 = new Player(this.p2, 'O')
     game.startGame()
 }
-
 
 
 const resetGame = () => {
@@ -108,7 +102,6 @@ const resetGame = () => {
         startButton.textContent = 'start'
     }, 100)
 }
-
 
 
 const selectGameType = e => {
@@ -126,6 +119,20 @@ const selectGameType = e => {
         game.gameType = 'pvc'
     }
 }
+
+//Event Delegator for Dynamic boardSquares
+const handleBoardClick = e => {
+    const clickedSquare = e.target
+    if (game.activateGame) {
+        if (clickedSquare.getAttribute('id') !== 'gameBoard') {
+            clickedSquare.textContent = game.turn.piece
+            if (game.turn === game.p1) game.turn = game.p2
+            else if (game.turn === game.p2) game.turn = game.p1
+
+        }
+    }
+}
+
 
 
 
@@ -148,30 +155,26 @@ const
 /*
 Game Init
 */
-const game = new GameLogic()
+
 const board = new Gameboard(gameBoard)
 board.buildBoard()
 gameTypeSelectorPvP.classList.add('active')
 const player1 = new Player('X')
 const player2 = new Player('O')
+const game = new GameLogic(player1, player2)
 
 
 /*
 Event Listeners
 */
 
-//Event Delegator for Dynamic boardSquares
-const handleBoardClick = e => {
-    const clickedSquare = e.target
-    if (game.activateGame) {
-        e.target.textContent = 'X'
-    }
-    if (clickedSquare !== 'gameBoard') { console.log(clickedSquare.getAttribute('id'), e.target.textContent) }
-}
-gameBoard.addEventListener('click', handleBoardClick)
 
 
 resetButton.onclick = resetGame
 gameTypeSelectorPvP.onclick = selectGameType
 gameTypeSelectorPvC.onclick = selectGameType
 startButton.onclick = startGame
+gameBoard.onclick = handleBoardClick
+
+//Once game is activated, can't change settings
+
