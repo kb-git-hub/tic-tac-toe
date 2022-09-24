@@ -82,7 +82,12 @@ class GameLogic {
         }
     }
 
-    checkforResult() { }
+    checkforResult() { 
+
+        let checkArray = []
+        return !!checkArray.reduce((a, b) => (a===b) ? a: NaN)
+
+    }
     updateWinner() { }
 
     updatePiecesArray(gameBoard) {
