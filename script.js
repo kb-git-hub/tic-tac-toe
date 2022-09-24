@@ -61,6 +61,7 @@ class GameLogic {
         this.activateGame = false
         this.turn = null
         this.piecesArray = []
+        this.winner = ''
     }
 
     startGame() {
@@ -72,6 +73,7 @@ class GameLogic {
 
     resetGame() {
         this.activateGame = false
+        this.winner = ''
     }
 
     checkSquareOccupied(square) {
@@ -86,33 +88,37 @@ class GameLogic {
 
     checkforWin(gameBoard) {
         //check rows
+        let checkArray
         for (let i = 0; i < this.piecesArray.length; i++) {
-            let checkArray = [];
+            checkArray = [];
             for (let j = 0; j < this.piecesArray.length; j++) {
                 checkArray.push(this.piecesArray[i][j].piece);
             }
             if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+                this.winner = checkArray[2]
                 return true;
             }
         }
 
         // check columns
         for (let i = 0; i < this.piecesArray.length; i++) {
-            let checkArray = [];
+            checkArray = [];
             for (let j = 0; j < this.piecesArray.length; j++) {
                 checkArray.push(this.piecesArray[j][i].piece);
             }
             if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+                this.winner = checkArray[2]
                 return true;
             }
         }
 
         // check Diags
-        let checkArray = []
+        checkArray = []
         for (let i = 0; i < this.piecesArray.length; i++) {
             checkArray.push(this.piecesArray[i][i].piece);
         }
         if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+            this.winner = checkArray[2]
             return true
 
         }
@@ -121,6 +127,7 @@ class GameLogic {
             checkArray.push(this.piecesArray[i][i].piece);
         }
         if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+            this.winner = checkArray[2]
             return true;
 
         }
