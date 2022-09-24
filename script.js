@@ -82,7 +82,7 @@ class GameLogic {
         }
     }
 
-    checkforWin() { }
+    checkforResult() { }
     updateWinner() { }
 
     updatePiecesArray(gameBoard) {
@@ -96,8 +96,6 @@ class GameLogic {
         }
     }
 }
-
-
 
 
 /*
@@ -156,9 +154,6 @@ const handleBoardClick = e => {
         }
     }
 }
-
-
-
 
 
 /* 
