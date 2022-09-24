@@ -75,29 +75,36 @@ class GameLogic {
     }
 
     checkSquareOccupied(square) {
-        for (const arrayItem of this.piecesArray) {
-            if (arrayItem.square === square) {
-                return (arrayItem.piece ? true : false)
+        for (const row of this.piecesArray) {
+            for (const squareObjects of row) {
+                if (squareObjects.square === square) {
+                    return (squareObjects.piece ? true : false)
+                }
             }
         }
     }
 
-    checkforResult() { 
-
+    checkforResult() {
         let checkArray = []
-        return !!checkArray.reduce((a, b) => (a===b) ? a: NaN)
+        return !!checkArray.reduce((a, b) => (a === b) ? a : NaN)
 
     }
     updateWinner() { }
 
     updatePiecesArray(gameBoard) {
         this.piecesArray = []
-        for (const board of gameBoard) {
-            let item = {
-                square: board.getAttribute('id'),
-                piece: board.textContent
+        let boardIterator = 0
+        for (let i = 0; i < gameBoard.length / 3; i++) {
+            let row = []
+            for (let j = 0; j < gameBoard.length / 3; j++) {
+                let squareData = {
+                    square: gameBoard[boardIterator].getAttribute('id'),
+                    piece: gameBoard[boardIterator].textContent
+                }
+                row.push(squareData)
+                boardIterator++
             }
-            this.piecesArray.push(item)
+            this.piecesArray.push(row)
         }
     }
 }
