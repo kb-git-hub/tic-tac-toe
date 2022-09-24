@@ -227,6 +227,7 @@ const
     p1Score = document.querySelector('#p1Score'),
     p2Score = document.querySelector('#p2Score')
 
+    
 
 /*
 Game Init
