@@ -67,6 +67,7 @@ class GameLogic {
         this.activateGame = true
         this.turn = this.p1
 
+
     }
 
     resetGame() {
@@ -131,7 +132,6 @@ const selectGameType = e => {
             gameTypeSelectorPvC.classList.remove('active')
             player2.type = 'player'
             game.gameType = 'pvp'
-
         } else if (gameTypeSelector.id === 'btn-pvc') {
             gameTypeSelectorPvC.classList.add('active')
             gameTypeSelectorPvP.classList.remove('active')
@@ -152,10 +152,7 @@ const handleBoardClick = e => {
                 if (game.turn === game.p1) game.turn = game.p2
                 else if (game.turn === game.p2) game.turn = game.p1
             }
-
-
             game.updatePiecesArray(board.board)
-
         }
     }
 }
@@ -190,13 +187,9 @@ const player1 = new Player('><')
 const player2 = new Player('()')
 const game = new GameLogic(player1, player2)
 game.updatePiecesArray(board.board)
-
-
 /*
 Event Listeners
 */
-
-
 
 resetButton.onclick = resetGame
 gameTypeSelectorPvP.onclick = selectGameType
@@ -205,4 +198,3 @@ startButton.onclick = startGame
 gameBoard.onclick = handleBoardClick
 
 //Once game is activated, can't change settings
-
