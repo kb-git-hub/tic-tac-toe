@@ -84,11 +84,48 @@ class GameLogic {
         }
     }
 
-    checkforResult() {
-        let checkArray = []
-        return !!checkArray.reduce((a, b) => (a === b) ? a : NaN)
+    checkforWin(gameBoard) {
+        //check rows
+        for (let i = 0; i < this.piecesArray.length; i++) {
+            let checkArray = [];
+            for (let j = 0; j < this.piecesArray.length; j++) {
+                checkArray.push(this.piecesArray[i][j].piece);
+            }
+            if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+                return true;
+            }
+        }
 
+        // check columns
+        for (let i = 0; i < this.piecesArray.length; i++) {
+            let checkArray = [];
+            for (let j = 0; j < this.piecesArray.length; j++) {
+                checkArray.push(this.piecesArray[j][i].piece);
+            }
+            if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+                return true;
+            }
+        }
+
+        // check Diags
+        let checkArray = []
+        for (let i = 0; i < this.piecesArray.length; i++) {
+            checkArray.push(this.piecesArray[i][i].piece);
+        }
+        if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+            return true
+
+        }
+        checkArray = []
+        for (let i = this.piecesArray.length - 1; i >= 0; i--) {
+            checkArray.push(this.piecesArray[i][i].piece);
+        }
+        if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
+            return true;
+
+        }
     }
+
     updateWinner() { }
 
     updatePiecesArray(gameBoard) {
@@ -163,6 +200,7 @@ const handleBoardClick = e => {
                 else if (game.turn === game.p2) game.turn = game.p1
             }
             game.updatePiecesArray(board.board)
+            console.log(game.checkforWin())
         }
     }
 }
