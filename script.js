@@ -153,7 +153,18 @@ class GameLogic {
 
     }
 
-    updateWinner() { }
+    getWinner() {
+        if (this.winner === this.p1.piece) {
+            this.p1.wins ++
+            return this.p1.name
+            
+        }
+        else if (this.winner === this.p2.piece) {
+            this.p2.wins ++
+            return this.p2.name
+        }
+        else return 'tie'
+    }
 
     updatePiecesArray(gameBoard) {
         this.piecesArray = []
@@ -235,7 +246,7 @@ const handleBoardClick = e => {
                 game.activateGame = false
                 displayResult()
 
-            } else if (!game.checkforEmptySquares()){
+            } else if (!game.checkforEmptySquares()) {
                 displayResult()
                 console.log('tie');
             }
@@ -246,6 +257,14 @@ const handleBoardClick = e => {
 
 
 const displayResult = () => {
+    const winner = game.getWinner()
+    if (winner === 'player 1') resultModalText.textContent = `${winner} wins!`
+    else if (winner === 'player 2') resultModalText.textContent = `${winner} wins!`
+    else  resultModalText.textContent = 'tie game!'
+
+    p1Score.textContent = player1.wins
+    p2Score.textContent = player2.wins
+
     overlay.classList.add('active')
     resultModal.classList.add('active')
     startButton.disabled = false
@@ -256,6 +275,12 @@ const closeModals = () => {
     resultModal.classList.remove('active')
     overlay.classList.remove('active')
 }
+
+
+const handleKeyBoardInput = (e) => {
+    if (e === 'escape') closeModals()
+}
+
 /* 
 User interface Variables
 */
@@ -271,9 +296,10 @@ const
     p2Score = document.querySelector('#p2Score'),
 
     resultModal = document.querySelector('#modal-result'),
+    resultModalText = document.querySelector('#modal-result-text'),
     overlay = document.querySelector('#overlay'),
     playAgain = document.querySelector('#modal-play-again-btn'),
-    closeModal = document.querySelector('#modal-close-btn')
+    exitModal = document.querySelector('#modal-close-btn')
 
 
 /*
@@ -292,7 +318,7 @@ game.updatePiecesArray(board.board)
 /*
 Event Listeners
 */
-
+window.onkeydown = handleKeyBoardInput
 resetButton.onclick = resetGame
 gameTypeSelectorPvP.onclick = selectGameType
 gameTypeSelectorPvC.onclick = selectGameType
@@ -308,7 +334,7 @@ overlay.addEventListener('click', () => {
     resetGame()
 })
 
-closeModal.addEventListener('click', () => {
+exitModal.addEventListener('click', () => {
     closeModals()
     resetGame()
 })

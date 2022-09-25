@@ -172,6 +172,7 @@ h1 {
     color: var(--org);
     border-radius: var(--border-radius);
     padding: var(--spacing-sm);
+    height: 34px;
 }
 
 /* game start and gametype selection  */
