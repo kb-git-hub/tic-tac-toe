@@ -136,15 +136,21 @@ class GameLogic {
         }
     }
 
-    checkSquares = (row) => {
-        for (let square of row) {
-            return square.piece === ''
+
+    checkforEmptySquares() {
+        let checkEmptySquares = (row) => {
+            for (let square of row) {
+                if (square.piece === '') {
+                    return true
+                }
+            }
         }
-    }
+        if (this.piecesArray.some(checkEmptySquares)) return true
+        else {
+            this.winner = 'tie'
+            return false
+        }
 
-
-    checkforTie() {
-        return this.piecesArray.some(this.checkSquares)
     }
 
     updateWinner() { }
@@ -229,11 +235,12 @@ const handleBoardClick = e => {
                 game.activateGame = false
                 displayResult()
 
-            } if (game.checkforTie()){
+            } else if (!game.checkforEmptySquares()){
+                displayResult()
                 console.log('tie');
             }
-
         }
+
     }
 }
 
