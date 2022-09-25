@@ -304,7 +304,6 @@ const
 /*
 Game Init
 */
-
 const board = new Gameboard(gameBoard)
 board.buildBoard()
 gameTypeSelectorPvP.classList.add('active')
