@@ -32,7 +32,7 @@ class Gameboard {
             divID++
             if (divID > 8) clearInterval(intervalID)
         }, this.drawspeed)
-        
+
     }
 
     //Reset Board
@@ -136,6 +136,17 @@ class GameLogic {
         }
     }
 
+    checkSquares = (row) => {
+        for (let square of row) {
+            return square.piece === ''
+        }
+    }
+
+
+    checkforTie() {
+        return this.piecesArray.some(this.checkSquares)
+    }
+
     updateWinner() { }
 
     updatePiecesArray(gameBoard) {
@@ -166,11 +177,14 @@ const startGame = () => {
         startButton.textContent = 'playing'
     }, 100)
 
+
     game.startGame()
+    startButton.disabled = true
 }
 
 
 const resetGame = () => {
+    startButton.disabled = false
     board.resetBoard()
     game.resetGame()
     game.updatePiecesArray(board.board)
@@ -214,7 +228,11 @@ const handleBoardClick = e => {
             if (game.checkforWin()) {
                 game.activateGame = false
                 displayResult()
+
+            } if (game.checkforTie()){
+                console.log('tie');
             }
+
         }
     }
 }
@@ -223,10 +241,11 @@ const handleBoardClick = e => {
 const displayResult = () => {
     overlay.classList.add('active')
     resultModal.classList.add('active')
+    startButton.disabled = false
 
 }
 
-const closeModals = () =>{
+const closeModals = () => {
     resultModal.classList.remove('active')
     overlay.classList.remove('active')
 }
@@ -246,7 +265,8 @@ const
 
     resultModal = document.querySelector('#modal-result'),
     overlay = document.querySelector('#overlay'),
-    playAgain = document.querySelector('#modal-play-again-btn')
+    playAgain = document.querySelector('#modal-play-again-btn'),
+    closeModal = document.querySelector('#modal-close-btn')
 
 
 /*
@@ -271,12 +291,17 @@ gameTypeSelectorPvP.onclick = selectGameType
 gameTypeSelectorPvC.onclick = selectGameType
 startButton.onclick = startGame
 gameBoard.onclick = handleBoardClick
-playAgain.addEventListener('click', () => { 
+playAgain.addEventListener('click', () => {
     closeModals()
     resetGame()
     startGame()
 })
 overlay.addEventListener('click', () => {
+    closeModals()
+    resetGame()
+})
+
+closeModal.addEventListener('click', () => {
     closeModals()
     resetGame()
 })
