@@ -158,12 +158,21 @@ h1 {
     justify-content: center;
     text-align: center;
     gap: var(--spacing-sm);
+    line-height: 1;
 }
 
 .scoreCard>div {
-    width: 80px;
+    font-size: 14px;
+    width: 85px;
 }
 
+.p1Score,
+.p2Score {
+    background-color: var(--green-600);
+    color: var(--org);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm);
+}
 
 /* game start and gametype selection  */
 
@@ -206,12 +215,7 @@ h1 {
     padding: 0px var(--spacing-lg);
 }
 
-.p1Score,
-.p2Score {
-    background-color: var(--green-600);
-    color: var(--org);
-    border-radius: var(--border-radius);
-}
+
 
 
 /* gameboard */
@@ -268,7 +272,7 @@ h1 {
 
 /* Modal  */
 
-#modal-winner {
+#modal-result {
     z-index: 1;
     position: absolute;
     display: flex;
@@ -290,12 +294,12 @@ h1 {
 
 }
 
-#modal-winner-text{
+#modal-result-text{
     font-size: 32px;
     line-height: 1;
 }
 
-#modal-winner.active{
+#modal-result.active{
     transform: translate(-50%, -50%) scale(1);
 
 }

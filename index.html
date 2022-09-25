@@ -42,19 +42,14 @@
             <div class="gameSections">
                 <div>score</div>
                 <div class="scoreCard">
-                    <div>p1</div>
-                    <div>p2</div>
+                    <div>player 1</div>
+                    <div>player 2</div>
                     <div class="p1Score" id="p1Score">1</div>
                     <div class="p2Score" id="p2Score">2</div>
                 </div>
             </div>
         </div>
-        <div class="gameBoard" id="gameBoard">
-            <div class="modal active" id="modal-winner">
-                <div id='modal-winner-text'>player one Wins</div>
-                <button class="btn" id="modal-start-game">Play Again?</button>
-            </div>
-        </div>
+        <div class="gameBoard" id="gameBoard"></div>
     </div>
 
 
@@ -70,7 +65,10 @@
             <i class="fab fa-github-alt"></i>
         </a>
     </div>
-    
+    <div class="modal" id="modal-result">
+        <div id='modal-result-text'>player one Wins</div>
+        <button class="btn" id="modal-play-again-btn">Play Again?</button>
+    </div>
     <div class="overlay" id="overlay"></div>
 
     

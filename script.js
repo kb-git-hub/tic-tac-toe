@@ -32,6 +32,7 @@ class Gameboard {
             divID++
             if (divID > 8) clearInterval(intervalID)
         }, this.drawspeed)
+        
     }
 
     //Reset Board
@@ -43,15 +44,16 @@ class Gameboard {
 }
 
 class Player {
-    constructor(piece) {
+    constructor(piece, name) {
         this.type = 'player'
         this.piece = piece
         this.wins = 0
+        this.name = name
     }
     displayWins() { }
 }
 
-////////////////////////////////////
+
 
 class GameLogic {
     constructor(p1, p2, gameType = 'pvp') {
@@ -120,11 +122,12 @@ class GameLogic {
         if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
             this.winner = checkArray[2]
             return true
-
         }
+
         checkArray = []
         for (let i = this.piecesArray.length - 1; i >= 0; i--) {
-            checkArray.push(this.piecesArray[i][i].piece);
+            let j = this.piecesArray.length - 1 - i
+            checkArray.push(this.piecesArray[i][j].piece)
         }
         if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
             this.winner = checkArray[2]
@@ -207,12 +210,26 @@ const handleBoardClick = e => {
                 else if (game.turn === game.p2) game.turn = game.p1
             }
             game.updatePiecesArray(board.board)
-            console.log(game.checkforWin())
+
+            if (game.checkforWin()) {
+                game.activateGame = false
+                displayResult()
+            }
         }
     }
 }
 
 
+const displayResult = () => {
+    overlay.classList.add('active')
+    resultModal.classList.add('active')
+
+}
+
+const closeModals = () =>{
+    resultModal.classList.remove('active')
+    overlay.classList.remove('active')
+}
 /* 
 User interface Variables
 */
@@ -225,9 +242,12 @@ const
     gameTypeSelectorPvC = document.querySelector('#btn-pvc'),
 
     p1Score = document.querySelector('#p1Score'),
-    p2Score = document.querySelector('#p2Score')
+    p2Score = document.querySelector('#p2Score'),
 
-    
+    resultModal = document.querySelector('#modal-result'),
+    overlay = document.querySelector('#overlay'),
+    playAgain = document.querySelector('#modal-play-again-btn')
+
 
 /*
 Game Init
@@ -236,10 +256,12 @@ Game Init
 const board = new Gameboard(gameBoard)
 board.buildBoard()
 gameTypeSelectorPvP.classList.add('active')
-const player1 = new Player('><')
-const player2 = new Player('()')
+const player1 = new Player('><', 'player 1')
+const player2 = new Player('()', 'player 2')
 const game = new GameLogic(player1, player2)
 game.updatePiecesArray(board.board)
+
+
 /*
 Event Listeners
 */
@@ -249,5 +271,12 @@ gameTypeSelectorPvP.onclick = selectGameType
 gameTypeSelectorPvC.onclick = selectGameType
 startButton.onclick = startGame
 gameBoard.onclick = handleBoardClick
-
-//Once game is activated, can't change settings
+playAgain.addEventListener('click', () => { 
+    closeModals()
+    resetGame()
+    startGame()
+})
+overlay.addEventListener('click', () => {
+    closeModals()
+    resetGame()
+})
