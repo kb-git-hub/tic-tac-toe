@@ -248,7 +248,6 @@ const handleBoardClick = e => {
 
             } else if (!game.checkforEmptySquares()) {
                 displayResult()
-                console.log('tie');
             }
         }
 
