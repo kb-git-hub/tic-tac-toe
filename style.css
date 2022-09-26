@@ -221,6 +221,8 @@ h1 {
 
 /* gameboard */
 .gameBoard {
+    /* pointer-events make this unclickable */
+    pointer-events: none;
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, minmax(33%, 1fr));
@@ -234,6 +236,7 @@ h1 {
 }
 
 .boardSquare {
+    pointer-events: auto;
     background-color: var(--primary-orange);
     border-radius: var(--border-radius);
     display: flex;

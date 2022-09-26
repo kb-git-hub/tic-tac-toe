@@ -231,7 +231,7 @@ const selectGameType = e => {
 
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
-    
+
     activateHumanMove(e)
 
     if (game.gameType === 'pvc') {
@@ -270,22 +270,20 @@ const activateHumanMove = (e) => {
     const clickedSquare = e.target
     const clickedSquareID = clickedSquare.getAttribute('id')
     if (game.activateGame) {
-        if (clickedSquareID !== 'gameBoard') {
-            if (!game.checkSquareOccupied(clickedSquareID)) {
-                clickedSquare.textContent = game.turn.piece
-                if (game.turn === game.p1) game.turn = game.p2
-                else if (game.turn === game.p2) game.turn = game.p1
-            }
-            game.updatePiecesArray(board.board)
+        if (!game.checkSquareOccupied(clickedSquareID)) {
+            clickedSquare.textContent = game.turn.piece
+            if (game.turn === game.p1) game.turn = game.p2
+            else if (game.turn === game.p2) game.turn = game.p1
+        }
+        game.updatePiecesArray(board.board)
 
-            if (game.checkforWin(game.piecesArray)) {
-                game.activateGame = false
-                displayResult()
+        if (game.checkforWin(game.piecesArray)) {
+            game.activateGame = false
+            displayResult()
 
-            } else if (!game.checkforEmptySquares()) {
-                game.activateGame = false
-                displayResult()
-            }
+        } else if (!game.checkforEmptySquares()) {
+            game.activateGame = false
+            displayResult()
         }
     }
 }
@@ -303,7 +301,7 @@ const activateAIMove = () => {
         if (game.turn === game.p1) game.turn = game.p2
         else if (game.turn === game.p2) game.turn = game.p1
         game.updatePiecesArray(board.board)
-        
+
         if (game.checkforWin(game.piecesArray)) {
             game.activateGame = false
             displayResult()
