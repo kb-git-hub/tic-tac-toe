@@ -8,29 +8,9 @@ let
     player = player1, 
     computerAI = player2
 
-// game.checkforEmptySquares()
-// function isMovesLeft(board)
-
-// game.checkforWin(gameBoard)
-// function evaluate(b)
-
 
 function minimax(board, depth, isMax)
 {
-	let score = game.checkforWin(board);
-
-	// Maximizer (><) win
-	if (score === player.piece)
-		return 10;
-
-	// Minimizer (()) win
-	if (score == computerAI.piece)
-		return -10;
-
-    // tie
-	if (!game.checkforEmptySquares())
-		return 0;
-
 	// If this maximizer's move
 	if (isMax)
 	{
@@ -43,10 +23,8 @@ function minimax(board, depth, isMax)
 			{
 				
 				// Check if cell is empty
-                
 				if (board[i][j].piece=='')
 				{
-					
 					// Make the move
 					board[i][j].piece = player.piece;
 
@@ -76,7 +54,7 @@ function minimax(board, depth, isMax)
 			{
 				
 				// Check if cell is empty
-				if (board[i][j].piece == '')
+				if (board[i][j].piece === '')
 				{
 					
 					// Make the move
@@ -92,6 +70,8 @@ function minimax(board, depth, isMax)
 				}
 			}
 		}
+		
+		console.log('🌌 | file: minimax.js | line 99 | best', best)
 		return best;
 	}
 }
@@ -103,7 +83,7 @@ function findBestMove(board)
 	let bestVal = -1000;
 	let bestMove = new aiMove();
 	bestMove.row = -1;
-	bestMove.col = -1;
+	bestMove.col = -1; 
 
 	// Traverse all cells, evaluate
 	// minimax function for all empty
@@ -115,7 +95,7 @@ function findBestMove(board)
 		{
 			
 			// Check if cell is empty
-			if (board[i][j].piece == '')
+			if (board[i][j].piece === '')
 			{
 				
 				// Make the move
@@ -144,4 +124,3 @@ function findBestMove(board)
 }
 
 
-// let bestMove = findBestMove(game.piecesArray);

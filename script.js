@@ -231,7 +231,6 @@ const selectGameType = e => {
 
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
-
     activateHumanMove(e)
 
     if (game.gameType === 'pvc') {
@@ -291,6 +290,7 @@ const activateHumanMove = (e) => {
 const activateAIMove = () => {
     if (game.activateGame) {
         const aiMove = findBestMove(game.piecesArray)
+        
         const convertAIMoveToSquare = (aiOutput) => {
             let row = aiOutput.row * 3
             let col = aiOutput.col
