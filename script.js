@@ -155,12 +155,12 @@ class GameLogic {
 
     getWinner() {
         if (this.winner === this.p1.piece) {
-            this.p1.wins ++
+            this.p1.wins++
             return this.p1.name
-            
+
         }
         else if (this.winner === this.p2.piece) {
-            this.p2.wins ++
+            this.p2.wins++
             return this.p2.name
         }
         else return 'tie'
@@ -231,41 +231,20 @@ const selectGameType = e => {
 
 //Event Delegator for Dynamic boardSquares
 const handleBoardClick = e => {
-    const clickedSquare = e.target
-    const clickedSquareID = clickedSquare.getAttribute('id')
-    if (game.activateGame) {
-        if (clickedSquareID !== 'gameBoard') {
-            if (!game.checkSquareOccupied(clickedSquareID)) {
-                clickedSquare.textContent = game.turn.piece
-                if (game.turn === game.p1) game.turn = game.p2
-                else if (game.turn === game.p2) game.turn = game.p1
-            }
-            game.updatePiecesArray(board.board)
+    activateHumanMove(e)
 
-            if (game.checkforWin(game.piecesArray)) {
-                game.activateGame = false
-                displayResult()
-
-            } else if (!game.checkforEmptySquares()) {
-                displayResult()
-            }
-        }
-        let aiMove = findBestMove(game.piecesArray)
-        console.log('🚀 | file: script.js | line 254 | handleBoardClick | aiMove', aiMove)
-        /*
-        here is where function goes for AI move.
-        if gametype pvc. return best move and update text content.
-        switch gameturn.
-        */
+    if (game.gameType === 'pvc') {
+        setTimeout(()=>activateAIMove(), 300)
     }
 }
+
 
 
 const displayResult = () => {
     const winner = game.getWinner()
     if (winner === 'player 1') resultModalText.textContent = `${winner} wins!`
     else if (winner === 'player 2') resultModalText.textContent = `${winner} wins!`
-    else  resultModalText.textContent = 'tie game!'
+    else resultModalText.textContent = 'tie game!'
 
     p1Score.textContent = player1.wins
     p2Score.textContent = player2.wins
@@ -286,59 +265,96 @@ const handleKeyBoardInput = (e) => {
     if (e === 'escape') closeModals()
 }
 
-/* 
-User interface Variables
-*/
-const
-    gameBoard = document.querySelector('#gameBoard'),
-    startButton = document.querySelector('#btn-start-game'),
-    resetButton = document.querySelector('#btn-reset-game'),
+const activateHumanMove = (e) => {
+    const clickedSquare = e.target
+    const clickedSquareID = clickedSquare.getAttribute('id')
+    if (game.activateGame) {
+        if (clickedSquareID !== 'gameBoard') {
+            if (!game.checkSquareOccupied(clickedSquareID)) {
+                clickedSquare.textContent = game.turn.piece
+                if (game.turn === game.p1) game.turn = game.p2
+                else if (game.turn === game.p2) game.turn = game.p1
+            }
+            game.updatePiecesArray(board.board)
 
-    gameTypeSelectorPvP = document.querySelector('#btn-pvp'),
-    gameTypeSelectorPvC = document.querySelector('#btn-pvc'),
+            if (game.checkforWin(game.piecesArray)) {
+                game.activateGame = false
+                displayResult()
 
-    p1Score = document.querySelector('#p1Score'),
-    p2Score = document.querySelector('#p2Score'),
+            } else if (!game.checkforEmptySquares()) {
+                displayResult()
+            }
+        }
+    }
+}
 
-    resultModal = document.querySelector('#modal-result'),
-    resultModalText = document.querySelector('#modal-result-text'),
-    overlay = document.querySelector('#overlay'),
-    playAgain = document.querySelector('#modal-play-again-btn'),
-    exitModal = document.querySelector('#modal-close-btn')
+    const activateAIMove = () => {
+        const aiMove = findBestMove(game.piecesArray)
+        const convertAIMoveToSquare = (aiOutput)=>{
+            let row = aiOutput.row *3
+            let col = aiOutput.col
+            return row + col
+        }
+        const aiTargetSquare = convertAIMoveToSquare(aiMove)
+        board.board[aiTargetSquare].textContent = game.turn.piece
+        if (game.turn === game.p1) game.turn = game.p2
+        else if (game.turn === game.p2) game.turn = game.p1
+        game.updatePiecesArray(board.board)
+
+    }
+    /* 
+    User interface Variables
+    */
+    const
+        gameBoard = document.querySelector('#gameBoard'),
+        startButton = document.querySelector('#btn-start-game'),
+        resetButton = document.querySelector('#btn-reset-game'),
+
+        gameTypeSelectorPvP = document.querySelector('#btn-pvp'),
+        gameTypeSelectorPvC = document.querySelector('#btn-pvc'),
+
+        p1Score = document.querySelector('#p1Score'),
+        p2Score = document.querySelector('#p2Score'),
+
+        resultModal = document.querySelector('#modal-result'),
+        resultModalText = document.querySelector('#modal-result-text'),
+        overlay = document.querySelector('#overlay'),
+        playAgain = document.querySelector('#modal-play-again-btn'),
+        exitModal = document.querySelector('#modal-close-btn')
 
 
-/*
-Game Init
-*/
-const board = new Gameboard(gameBoard)
-board.buildBoard()
-gameTypeSelectorPvP.classList.add('active')
-const player1 = new Player('><', 'player 1')
-const player2 = new Player('()', 'player 2')
-const game = new GameLogic(player1, player2)
-game.updatePiecesArray(board.board)
+    /*
+    Game Init
+    */
+    const board = new Gameboard(gameBoard)
+    board.buildBoard()
+    gameTypeSelectorPvP.classList.add('active')
+    const player1 = new Player('><', 'player 1')
+    const player2 = new Player('()', 'player 2')
+    const game = new GameLogic(player1, player2)
+    game.updatePiecesArray(board.board)
 
 
-/*
-Event Listeners
-*/
-window.onkeydown = handleKeyBoardInput
-resetButton.onclick = resetGame
-gameTypeSelectorPvP.onclick = selectGameType
-gameTypeSelectorPvC.onclick = selectGameType
-startButton.onclick = startGame
-gameBoard.onclick = handleBoardClick
-playAgain.addEventListener('click', () => {
-    closeModals()
-    resetGame()
-    startGame()
-})
-overlay.addEventListener('click', () => {
-    closeModals()
-    resetGame()
-})
+    /*
+    Event Listeners
+    */
+    window.onkeydown = handleKeyBoardInput
+    resetButton.onclick = resetGame
+    gameTypeSelectorPvP.onclick = selectGameType
+    gameTypeSelectorPvC.onclick = selectGameType
+    startButton.onclick = startGame
+    gameBoard.onclick = handleBoardClick
+    playAgain.addEventListener('click', () => {
+        closeModals()
+        resetGame()
+        startGame()
+    })
+    overlay.addEventListener('click', () => {
+        closeModals()
+        resetGame()
+    })
 
-exitModal.addEventListener('click', () => {
-    closeModals()
-    resetGame()
-})
+    exitModal.addEventListener('click', () => {
+        closeModals()
+        resetGame()
+    })

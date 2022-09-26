@@ -43,11 +43,12 @@ function minimax(board, depth, isMax)
 			{
 				
 				// Check if cell is empty
-				if (board[i][j]=='_')
+                
+				if (board[i][j].piece=='')
 				{
 					
 					// Make the move
-					board[i][j] = player;
+					board[i][j].piece = player.piece;
 
 					// Call minimax recursively
 					// and choose the maximum value
@@ -55,9 +56,10 @@ function minimax(board, depth, isMax)
 									depth + 1, !isMax));
 
 					// Undo the move
-					board[i][j] = '_';
+					board[i][j].piece = '';
 				}
 			}
+            
 		}
 		return best;
 	}
@@ -74,11 +76,11 @@ function minimax(board, depth, isMax)
 			{
 				
 				// Check if cell is empty
-				if (board[i][j] == '_')
+				if (board[i][j].piece == '')
 				{
 					
 					// Make the move
-					board[i][j] = computerAI;
+					board[i][j].piece = computerAI.piece;
 
 					// Call minimax recursively and
 					// choose the minimum value
@@ -86,7 +88,7 @@ function minimax(board, depth, isMax)
 									depth + 1, !isMax));
 
 					// Undo the move
-					board[i][j] = '_';
+					board[i][j].piece = '';
 				}
 			}
 		}
@@ -117,14 +119,14 @@ function findBestMove(board)
 			{
 				
 				// Make the move
-				board[i][j] = player;
+				board[i][j] = player.piece;
 
 				// compute evaluation function
 				// for this move.
 				let moveVal = minimax(board, 0, false);
 
 				// Undo the move
-				board[i][j] = '';
+				board[i][j].piece = '';
 
 				// If the value of the current move
 				// is more than the best value, then
@@ -142,6 +144,4 @@ function findBestMove(board)
 }
 
 
-// let board = game.piecesArray
-let bestMove = findBestMove(game.piecesArray);
-console.log('🚀 | file: minimax.js | line 150 | bestMove', bestMove)
+// let bestMove = findBestMove(game.piecesArray);
