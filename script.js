@@ -91,10 +91,10 @@ class GameLogic {
     checkforWin(gameBoard) {
         //check rows
         let checkArray
-        for (let i = 0; i < this.piecesArray.length; i++) {
+        for (let i = 0; i < gameBoard.length; i++) {
             checkArray = [];
-            for (let j = 0; j < this.piecesArray.length; j++) {
-                checkArray.push(this.piecesArray[i][j].piece);
+            for (let j = 0; j < gameBoard.length; j++) {
+                checkArray.push(gameBoard[i][j].piece);
             }
             if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
                 this.winner = checkArray[2]
@@ -103,10 +103,10 @@ class GameLogic {
         }
 
         // check columns
-        for (let i = 0; i < this.piecesArray.length; i++) {
+        for (let i = 0; i < gameBoard.length; i++) {
             checkArray = [];
-            for (let j = 0; j < this.piecesArray.length; j++) {
-                checkArray.push(this.piecesArray[j][i].piece);
+            for (let j = 0; j < gameBoard.length; j++) {
+                checkArray.push(gameBoard[j][i].piece);
             }
             if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
                 this.winner = checkArray[2]
@@ -116,8 +116,8 @@ class GameLogic {
 
         // check Diags
         checkArray = []
-        for (let i = 0; i < this.piecesArray.length; i++) {
-            checkArray.push(this.piecesArray[i][i].piece);
+        for (let i = 0; i < gameBoard.length; i++) {
+            checkArray.push(gameBoard[i][i].piece);
         }
         if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
             this.winner = checkArray[2]
@@ -125,9 +125,9 @@ class GameLogic {
         }
 
         checkArray = []
-        for (let i = this.piecesArray.length - 1; i >= 0; i--) {
-            let j = this.piecesArray.length - 1 - i
-            checkArray.push(this.piecesArray[i][j].piece)
+        for (let i = gameBoard.length - 1; i >= 0; i--) {
+            let j = gameBoard.length - 1 - i
+            checkArray.push(gameBoard[i][j].piece)
         }
         if (!!checkArray.reduce((a, b) => (a === b ? a : NaN))) {
             this.winner = checkArray[2]
@@ -242,7 +242,7 @@ const handleBoardClick = e => {
             }
             game.updatePiecesArray(board.board)
 
-            if (game.checkforWin()) {
+            if (game.checkforWin(game.piecesArray)) {
                 game.activateGame = false
                 displayResult()
 
@@ -250,7 +250,13 @@ const handleBoardClick = e => {
                 displayResult()
             }
         }
-
+        let aiMove = findBestMove(game.piecesArray)
+        console.log('🚀 | file: script.js | line 254 | handleBoardClick | aiMove', aiMove)
+        /*
+        here is where function goes for AI move.
+        if gametype pvc. return best move and update text content.
+        switch gameturn.
+        */
     }
 }
 
